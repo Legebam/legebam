@@ -1,0 +1,15 @@
+# OSX
+#
+.DS_Store
+
+# Meteor
+#
+.deploy/development/settings.json
+.deploy/development/mup.json
+.deploy/staging/*
+.deploy/production/*
+
+# node.js
+#
+node_modules/
+npm-debug.log

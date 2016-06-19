@@ -1,0 +1,8 @@
+{
+  "public": {
+    "env": "development"
+  },
+  "private": {
+    "GOOGLE_API": ""
+  }
+}
