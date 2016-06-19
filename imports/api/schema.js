@@ -21,7 +21,7 @@ const rootSchema = [`
 
 const schemas = [
   ...rootSchema,
-  ...documentsSchema,
+  ...booksSchema,
   ...usersSchema
 ];
 
