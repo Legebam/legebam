@@ -1,31 +1,31 @@
-import { DocumentsList } from '../components/documents-list.js';
+import { BooksList } from '../components/books-list.js';
 import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-apollo';
 import { createContainer } from 'meteor/react-meteor-data';
 
 
-function removeDocumentMutation(userId, documentId) {
+function removeBookMutation(userId, bookId) {
   return {
     mutation: gql`
-    mutation removeDocument($userId: String!, $documentId: String!) {
-      removeDocument(userId: $userId, documentId: $documentId) {
+    mutation removeBook($userId: String!, $bookId: String!) {
+      removeBook(userId: $userId, bookId: $bookId) {
         _id
       }
     }`,
     variables: {
       userId,
-      documentId,
+      bookId,
     },
   };
 }
 
-function updateDocumentMutation(userId, documentId, title) {
+function updateBookMutation(userId, bookId, title) {
   return {
     mutation: gql`
-    mutation updateDocument($userId: String!, $documentId: String!, $title: String) {
-      updateDocument(
+    mutation updateBook($userId: String!, $bookId: String!, $title: String) {
+      updateBook(
         userId: $userId,
-        documentId: $documentId,
+        bookId: $bookId,
         title: $title
       ) {
         _id
@@ -33,7 +33,7 @@ function updateDocumentMutation(userId, documentId, title) {
     }`,
     variables: {
       userId,
-      documentId,
+      bookId,
       title,
     },
   };
@@ -43,8 +43,8 @@ function mapQueriesToProps({ ownProps, state }) {
   return {
     data: {
       query: gql`
-        query getDocuments($limit: Int!) {
-          documents(limit: $limit) {
+        query getBooks($limit: Int!) {
+          books(limit: $limit) {
             _id
             title
           }
@@ -60,23 +60,23 @@ function mapQueriesToProps({ ownProps, state }) {
 function mapMutationsToProps({ ownProps, state }) {
   if (ownProps.userId) {
     return {
-      updateDocument: updateDocumentMutation,
-      removeDocument: removeDocumentMutation,
+      updateBook: updateBookMutation,
+      removeBook: removeBookMutation,
     };
   }
 }
 
-const DocumentsListWithData = connect({
+const BooksListWithData = connect({
   mapQueriesToProps,
   mapMutationsToProps,
-})(DocumentsList);
+})(BooksList);
 
 // This container brings in Tracker-enabled Meteor data
-const DocumentsListWithUserId = createContainer(() => {
+const BooksListWithUserId = createContainer(() => {
   return {
     userId: Meteor.userId(),
   };
-}, DocumentsListWithData);
+}, BooksListWithData);
 
-export default DocumentsListWithUserId;
+export default BooksListWithUserId;
 

@@ -1,17 +1,17 @@
 import React from 'react';
 import { ListGroup, Alert } from 'react-bootstrap';
-import { Document } from './document.js';
+import { Book } from './book.js';
 
-export const DocumentsList = ({ userId, data, mutations }) => {
-  const { documents } = data;
+export const BooksList = ({ userId, data, mutations }) => {
+  const { books } = data;
   return (
-    documents && documents.length > 0
+    books && books.length > 0
       ?
-      <ListGroup className="documents-list">
-        {documents.map((doc) => (
-          <Document
+      <ListGroup className="books-list">
+        {books.map((doc) => (
+          <Book
             key={ doc._id }
-            document={ doc }
+            book={ doc }
             data={ data }
             mutations={ mutations }
             userId={ userId }
@@ -20,11 +20,11 @@ export const DocumentsList = ({ userId, data, mutations }) => {
         ))}
       </ListGroup>
       :
-      <Alert bsStyle="warning">No documents yet.</Alert>
+      <Alert bsStyle="warning">No books yet.</Alert>
   );
 };
 
-DocumentsList.propTypes = {
+BooksList.propTypes = {
   userId: React.PropTypes.string,
   data: React.PropTypes.object,
   mutations: React.PropTypes.object,

@@ -1,13 +1,13 @@
-import { AddDocument } from '../components/add-document.js';
+import { AddBook } from '../components/add-book.js';
 import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-apollo';
 import { createContainer } from 'meteor/react-meteor-data';
 
-function insertDocumentMutation(userId, title) {
+function insertBookMutation(userId, title) {
   return {
     mutation: gql`
-    mutation insertDocument($userId: String!, $title: String) {
-      insertDocument(
+    mutation insertBook($userId: String!, $title: String) {
+      insertBook(
         userId: $userId,
         title: $title
       ) {
@@ -25,8 +25,8 @@ function mapQueriesToProps({ ownProps, state }) {
   return {
     data: {
       query: gql`
-        query getDocuments($limit: Int!) {
-          documents(limit: $limit) {
+        query getBooks($limit: Int!) {
+          books(limit: $limit) {
             _id
             title
           }
@@ -42,22 +42,22 @@ function mapQueriesToProps({ ownProps, state }) {
 function mapMutationsToProps({ ownProps, state }) {
   if (ownProps.userId) {
     return {
-      insertDocument: insertDocumentMutation,
+      insertBook: insertBookMutation,
     };
   }
 }
 
-const AddDocumentWithData = connect({
+const AddBookWithData = connect({
   mapQueriesToProps,
   mapMutationsToProps,
-})(AddDocument);
+})(AddBook);
 
 // This container brings in Tracker-enabled Meteor data
-const AddDocumentWithUserId = createContainer(() => {
+const AddBookWithUserId = createContainer(() => {
   return {
     userId: Meteor.userId(),
   };
-}, AddDocumentWithData);
+}, AddBookWithData);
 
-export default AddDocumentWithUserId;
+export default AddBookWithUserId;
 

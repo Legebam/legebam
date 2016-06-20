@@ -1,10 +1,10 @@
 import { Bert } from 'meteor/themeteorchef:bert';
 
-export function dispatchInsertDocumentMutation(userId, title, mutation, refetch) {
+export function dispatchInsertBookMutation(userId, title, mutation, refetch) {
   return mutation(userId, title).then((result) => {
     const { data, errors } = result;
 
-    if (data) Bert.alert('Document inserted!', 'success');
+    if (data) Bert.alert('Book inserted!', 'success');
     if (errors) Bert.alert('Something bad happened!', 'danger');
     if (refetch) return refetch();
   }).catch((error) => {
@@ -12,12 +12,12 @@ export function dispatchInsertDocumentMutation(userId, title, mutation, refetch)
   });
 }
 
-export function dispatchUpdateDocumentMutation(userId, documentId, title, mutation, refetch) {
-  console.log(documentId);
-  return mutation(userId, documentId, title).then((result) => {
+export function dispatchUpdateBookMutation(userId, bookId, title, mutation, refetch) {
+  console.log(bookId);
+  return mutation(userId, bookId, title).then((result) => {
     const { data, errors } = result;
 
-    if (data) Bert.alert('Document updated!', 'success');
+    if (data) Bert.alert('Book updated!', 'success');
     if (errors) Bert.alert('Something bad happened!', 'danger');
     if (refetch) return refetch();
   }).catch((error) => {
@@ -25,11 +25,11 @@ export function dispatchUpdateDocumentMutation(userId, documentId, title, mutati
   });
 }
 
-export function dispatchRemoveDocumentMutation(userId, documentId, mutation, refetch) {
-  return mutation(userId, documentId).then((result) => {
+export function dispatchRemoveBookMutation(userId, bookId, mutation, refetch) {
+  return mutation(userId, bookId).then((result) => {
     const { data, errors } = result;
 
-    if (data) Bert.alert('Document removed!', 'success');
+    if (data) Bert.alert('Book removed!', 'success');
     if (errors) Bert.alert('Something bad happened!', 'danger');
     if (refetch) return refetch();
   }).catch((error) => {
